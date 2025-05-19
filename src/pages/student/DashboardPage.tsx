@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 
 const StudentDashboardPage = () => {
@@ -68,9 +69,9 @@ const StudentDashboardPage = () => {
             </div>
             <div className="bg-dark-600 px-5 py-3">
               <div className="text-sm">
-                <a href="/portfolio" className="font-medium text-purple-400 hover:text-purple-300">
+                <Link to="/portfolio" className="font-medium text-purple-400 hover:text-purple-300">
                   View portfolio
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -98,9 +99,9 @@ const StudentDashboardPage = () => {
             </div>
             <div className="bg-dark-600 px-5 py-3">
               <div className="text-sm">
-                <a href="/careers" className="font-medium text-purple-400 hover:text-purple-300">
+                <Link to="/careers" className="font-medium text-purple-400 hover:text-purple-300">
                   Explore careers
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -128,9 +129,9 @@ const StudentDashboardPage = () => {
             </div>
             <div className="bg-dark-600 px-5 py-3">
               <div className="text-sm">
-                <a href="/profile" className="font-medium text-purple-400 hover:text-purple-300">
+                <Link to="/profile" className="font-medium text-purple-400 hover:text-purple-300">
                   Complete profile
-                </a>
+                </Link>
               </div>
             </div>
           </div>

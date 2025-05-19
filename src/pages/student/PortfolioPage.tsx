@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 interface PortfolioItem {
   id: string;
@@ -34,8 +35,8 @@ const PortfolioPage = () => {
   
   return (
     <div>
-      <div className="pb-5 border-b border-gray-200 sm:flex sm:items-center sm:justify-between">
-        <h2 className="text-lg leading-6 font-medium text-gray-900">
+      <div className="pb-5 border-b border-gray-200 dark:border-dark-600 sm:flex sm:items-center sm:justify-between">
+        <h2 className="text-lg leading-6 font-medium text-gray-900 dark:text-white">
           My Portfolio
         </h2>
         <div className="mt-3 sm:mt-0 sm:ml-4">
@@ -43,7 +44,7 @@ const PortfolioPage = () => {
             type="button"
             onClick={handleFileUpload}
             disabled={isUploading}
-            className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gold-600 hover:bg-gold-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold-500"
+            className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 dark:focus:ring-offset-dark-700"
           >
             {isUploading ? (
               <>
@@ -64,42 +65,45 @@ const PortfolioPage = () => {
         {portfolioItems.length > 0 ? (
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {portfolioItems.map(item => (
-              <div key={item.id} className="bg-white overflow-hidden shadow rounded-lg">
+              <div key={item.id} className="bg-white dark:bg-dark-700 overflow-hidden shadow rounded-lg">
                 <div className="p-5">
                   <div className="flex items-center justify-between">
-                    <h3 className="text-lg leading-6 font-medium text-gray-900">
+                    <h3 className="text-lg leading-6 font-medium text-gray-900 dark:text-white">
                       {item.title}
                     </h3>
-                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gold-100 text-gold-800">
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200">
                       {item.fileType}
                     </span>
                   </div>
                   <div className="mt-2">
-                    <p className="text-sm text-gray-500">
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
                       {item.description}
                     </p>
                   </div>
-                  <div className="mt-4 text-sm text-gray-500">
+                  <div className="mt-4 text-sm text-gray-500 dark:text-gray-400">
                     Uploaded on {item.dateUploaded}
                   </div>
                 </div>
-                <div className="bg-gray-50 px-5 py-3">
+                <div className="bg-gray-50 dark:bg-dark-600 px-5 py-3">
                   <div className="text-sm">
-                    <a href={item.fileUrl} className="font-medium text-gold-600 hover:text-gold-500">
+                    <button
+                      onClick={() => window.open(item.fileUrl, '_blank')}
+                      className="font-medium text-purple-600 hover:text-purple-500 dark:text-purple-400 dark:hover:text-purple-300"
+                    >
                       View file
-                    </a>
+                    </button>
                   </div>
                 </div>
               </div>
             ))}
           </div>
         ) : (
-          <div className="bg-white shadow sm:rounded-lg">
+          <div className="bg-white dark:bg-dark-700 shadow sm:rounded-lg">
             <div className="px-4 py-5 sm:p-6">
-              <h3 className="text-lg leading-6 font-medium text-gray-900">
+              <h3 className="text-lg leading-6 font-medium text-gray-900 dark:text-white">
                 Your portfolio is empty
               </h3>
-              <div className="mt-2 max-w-xl text-sm text-gray-500">
+              <div className="mt-2 max-w-xl text-sm text-gray-500 dark:text-gray-400">
                 <p>
                   Upload your coursework, recipes, photos, or other hospitality-related assignments to build your portfolio.
                 </p>
@@ -108,7 +112,7 @@ const PortfolioPage = () => {
                 <button
                   type="button"
                   onClick={handleFileUpload}
-                  className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gold-600 hover:bg-gold-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold-500"
+                  className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 dark:focus:ring-offset-dark-700"
                 >
                   Upload your first item
                 </button>
