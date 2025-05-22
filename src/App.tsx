@@ -19,6 +19,7 @@ import StudentDashboardPage from './pages/student/DashboardPage';
 import PortfolioPage from './pages/student/PortfolioPage';
 import CareerExplorerPage from './pages/student/CareerExplorerPage';
 import StudentProfilePage from './pages/student/ProfilePage';
+import ResourcesPage from './pages/student/ResourcesPage';
 
 // Admin pages
 import AdminDashboardPage from './pages/admin/DashboardPage';
@@ -142,6 +143,7 @@ function App() {
           <Route path="dashboard" element={<StudentDashboardPage />} />
           <Route path="portfolio" element={<PortfolioPage />} />
           <Route path="careers" element={<CareerExplorerPage />} />
+          <Route path="resources" element={<ResourcesPage />} />
           <Route path="profile" element={<StudentProfilePage />} />
         </Route>
         
