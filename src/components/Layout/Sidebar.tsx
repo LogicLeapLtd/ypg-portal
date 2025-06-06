@@ -85,7 +85,7 @@ const Sidebar = () => {
         <div className="flex flex-shrink-0 border-t border-gray-200 dark:border-dark-600 p-4">
           <div className="flex w-full items-center justify-between">
             <Link
-              to="/profile"
+              to={userType === 'admin' ? '/admin/profile' : '/profile'}
               className="group block flex-shrink-0"
             >
               <div className="flex items-center">

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { colleges, interests } from '../../contexts/AuthContext';
+import UserFormModal from '../../components/admin/UserFormModal';
 
 interface Student {
   id: string;
@@ -16,6 +17,8 @@ const UserManagementPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCollege, setSelectedCollege] = useState<string | null>(null);
   const [selectedStatus, setSelectedStatus] = useState<string | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editingStudent, setEditingStudent] = useState<Student | null>(null);
   
   // Mock student data
   const [students, setStudents] = useState<Student[]>([
@@ -90,6 +93,38 @@ const UserManagementPage = () => {
     // In a real app, this would call an API
     setStudents(students.filter(student => student.id !== studentId));
   };
+
+  const handleAddStudent = () => {
+    setEditingStudent(null);
+    setIsModalOpen(true);
+  };
+
+  const handleEditStudent = (student: Student) => {
+    setEditingStudent(student);
+    setIsModalOpen(true);
+  };
+
+  const handleSubmitStudent = (userData: any) => {
+    if (editingStudent) {
+      // Update existing student
+      setStudents(students.map(student => 
+        student.id === editingStudent.id 
+          ? { ...student, ...userData }
+          : student
+      ));
+    } else {
+      // Add new student
+      const newStudent: Student = {
+        id: `student-${Date.now()}`,
+        ...userData,
+        emailVerified: false,
+        onboardingCompleted: false,
+        joinedDate: new Date().toISOString().split('T')[0]
+      };
+      setStudents([...students, newStudent]);
+    }
+    setIsModalOpen(false);
+  };
   
   const getCollegeName = (collegeId: string) => {
     const college = colleges.find(c => c.id === collegeId);
@@ -110,6 +145,7 @@ const UserManagementPage = () => {
         <div className="mt-3 sm:mt-0 sm:ml-4">
           <button
             type="button"
+            onClick={handleAddStudent}
             className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gold-600 hover:bg-gold-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold-500"
           >
             Add Student
@@ -251,7 +287,10 @@ const UserManagementPage = () => {
                         {new Date(student.joinedDate).toLocaleDateString()}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <button className="text-gold-600 hover:text-gold-900">
+                        <button 
+                          onClick={() => handleEditStudent(student)}
+                          className="text-gold-600 hover:text-gold-900"
+                        >
                           Edit
                         </button>
                         <button 
@@ -277,6 +316,13 @@ const UserManagementPage = () => {
           </div>
         </div>
       </div>
+
+      <UserFormModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSubmit={handleSubmitStudent}
+        initialData={editingStudent || undefined}
+      />
     </div>
   );
 };

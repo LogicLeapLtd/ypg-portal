@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import CareerFormModal from '../../components/admin/CareerFormModal';
 
 interface Career {
   id: string;
@@ -19,6 +20,8 @@ interface Assignment {
 
 const ContentManagementPage = () => {
   const [activeTab, setActiveTab] = useState<'careers' | 'assignments'>('careers');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editingCareer, setEditingCareer] = useState<Career | undefined>();
   
   // Mock career data
   const [careers, setCareers] = useState<Career[]>([
@@ -106,6 +109,35 @@ const ContentManagementPage = () => {
   const deleteAssignment = (assignmentId: string) => {
     setAssignments(assignments.filter(assignment => assignment.id !== assignmentId));
   };
+
+  const handleAddCareer = () => {
+    setEditingCareer(undefined);
+    setIsModalOpen(true);
+  };
+
+  const handleEditCareer = (career: Career) => {
+    setEditingCareer(career);
+    setIsModalOpen(true);
+  };
+
+  const handleSubmitCareer = (careerData: Omit<Career, 'id'>) => {
+    if (editingCareer) {
+      // Update existing career
+      setCareers(careers.map(career =>
+        career.id === editingCareer.id
+          ? { ...careerData, id: career.id }
+          : career
+      ));
+    } else {
+      // Add new career
+      const newCareer = {
+        ...careerData,
+        id: `career-${Date.now()}` // Generate a unique ID
+      };
+      setCareers([...careers, newCareer]);
+    }
+    setIsModalOpen(false);
+  };
   
   return (
     <div>
@@ -116,6 +148,7 @@ const ContentManagementPage = () => {
         <div className="mt-3 sm:mt-0 sm:ml-4">
           <button
             type="button"
+            onClick={activeTab === 'careers' ? handleAddCareer : undefined}
             className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gold-600 hover:bg-gold-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold-500"
           >
             {activeTab === 'careers' ? 'Add Career' : 'Add Assignment'}
@@ -214,6 +247,7 @@ const ContentManagementPage = () => {
                             </button>
                             <button 
                               className="ml-4 text-gold-600 hover:text-gold-900"
+                              onClick={() => handleEditCareer(career)}
                             >
                               Edit
                             </button>
@@ -328,6 +362,13 @@ const ContentManagementPage = () => {
           </div>
         </div>
       )}
+
+      <CareerFormModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSubmit={handleSubmitCareer}
+        initialData={editingCareer}
+      />
     </div>
   );
 };
