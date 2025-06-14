@@ -26,6 +26,8 @@ import AdminDashboardPage from './pages/admin/DashboardPage';
 import UserManagementPage from './pages/admin/UserManagementPage';
 import ContentManagementPage from './pages/admin/ContentManagementPage';
 import DataExportPage from './pages/admin/DataExportPage';
+import SettingsPage from './pages/admin/SettingsPage';
+import AdminProfilePage from './pages/admin/ProfilePage';
 
 // Initialize React Query client
 const queryClient = new QueryClient();
@@ -161,6 +163,8 @@ function App() {
           <Route path="users" element={<UserManagementPage />} />
           <Route path="content" element={<ContentManagementPage />} />
           <Route path="export" element={<DataExportPage />} />
+          <Route path="settings" element={<SettingsPage />} />
+          <Route path="profile" element={<AdminProfilePage />} />
         </Route>
         
         {/* Redirect based on user role */}

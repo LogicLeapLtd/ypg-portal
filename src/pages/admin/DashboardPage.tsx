@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
+import { Link } from 'react-router-dom';
 
 interface StatCard {
   title: string;
@@ -198,30 +199,30 @@ const AdminDashboardPage = () => {
               Quick Actions
             </h3>
             <div className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2">
-              <a
-                href="/admin/users"
+              <Link
+                to="/admin/users"
                 className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gold-600 hover:bg-gold-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold-500"
               >
                 Manage Users
-              </a>
-              <a
-                href="/admin/content"
+              </Link>
+              <Link
+                to="/admin/content"
                 className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gold-600 hover:bg-gold-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold-500"
               >
                 Manage Content
-              </a>
-              <a
-                href="/admin/export"
+              </Link>
+              <Link
+                to="/admin/export"
                 className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gold-600 hover:bg-gold-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold-500"
               >
                 Export Data
-              </a>
-              <a
-                href="#"
+              </Link>
+              <Link
+                to="/admin/settings"
                 className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gold-600 hover:bg-gold-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold-500"
               >
                 System Settings
-              </a>
+              </Link>
             </div>
           </div>
         </div>
