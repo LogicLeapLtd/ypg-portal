@@ -7,6 +7,7 @@ const AdminProfilePage = () => {
   const [phone, setPhone] = useState('');
   const [role, setRole] = useState('Platform Administrator');
   const [department, setDepartment] = useState('Education & Training');
+  const [facebookUrl, setFacebookUrl] = useState('');
   
   // Admin data from context
   const adminName = user?.name || 'Admin';
@@ -117,6 +118,57 @@ const AdminProfilePage = () => {
                 </dd>
               </div>
             </dl>
+          </div>
+        </div>
+      </div>
+      
+      <div className="mt-6">
+        <div className="bg-white shadow sm:rounded-lg">
+          <div className="px-4 py-5 sm:p-6">
+            <h3 className="text-lg leading-6 font-medium text-gray-900">
+              Social Media
+            </h3>
+            <div className="mt-2 max-w-xl text-sm text-gray-500">
+              <p>
+                Connect your social media accounts.
+              </p>
+            </div>
+            <div className="mt-5">
+              <div className="flex items-center space-x-4">
+                <div className="flex-shrink-0">
+                  <svg className="h-6 w-6 text-[#1877F2]" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                  </svg>
+                </div>
+                <div className="flex-1">
+                  {isEditing ? (
+                    <input
+                      type="text"
+                      value={facebookUrl}
+                      onChange={(e) => setFacebookUrl(e.target.value)}
+                      className="shadow-sm focus:ring-gold-500 focus:border-gold-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                      placeholder="Enter your Facebook profile URL"
+                    />
+                  ) : (
+                    <div className="flex items-center">
+                      <span className="text-sm text-gray-900">
+                        {facebookUrl || 'Not connected'}
+                      </span>
+                      {facebookUrl && (
+                        <a
+                          href={facebookUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="ml-2 text-sm text-gold-600 hover:text-gold-500"
+                        >
+                          Visit Profile
+                        </a>
+                      )}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
